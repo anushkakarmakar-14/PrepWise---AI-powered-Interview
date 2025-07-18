@@ -5,6 +5,7 @@ import { google } from "@ai-sdk/google";
 
 import { db } from "@/firebase/admin";
 import { feedbackSchema } from "@/constants";
+// import { getFirestore, collection, query, where, getDocs, limit } from "firebase/firestore";
 
 export async function createFeedback(params: CreateFeedbackParams) {
   const { interviewId, userId, transcript, feedbackId } = params;
@@ -83,6 +84,17 @@ export async function getFeedbackByInterviewId(
     .where("userId", "==", userId)
     .limit(1)
     .get();
+
+//   const db = getFirestore();
+
+// const q = query(
+//   collection(db, "feedback"),
+//   where("interviewId", "==", interviewId),
+//   where("userId", "==", userId),
+//   limit(1)
+// );
+
+// const querySnapshot = await getDocs(q);
 
   if (querySnapshot.empty) return null;
 
